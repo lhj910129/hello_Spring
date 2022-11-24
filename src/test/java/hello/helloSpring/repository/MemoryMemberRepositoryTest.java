@@ -20,7 +20,6 @@ public class MemoryMemberRepositoryTest {
 
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
-
     //테스트가 끝날때마다 실행!
     @AfterEach
     public  void afterEach(){
