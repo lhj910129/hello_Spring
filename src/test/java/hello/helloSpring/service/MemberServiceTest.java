@@ -4,17 +4,25 @@ import hello.helloSpring.domain.Member;
 import hello.helloSpring.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceTest {
 
-    MemberService memberService = new MemberService();
-    MemoryMemberRepository memoryMemberRepository = new MemoryMemberRepository();
+    MemberService memberService;
+    MemoryMemberRepository memberRepository;
+
+    @BeforeEach //메소드 시작하기 전에 실행!!
+    public void beforeEach(){
+        memberRepository = new MemoryMemberRepository();
+        memberService = new MemberService(memberRepository); //의존성 주입
+    }
+
     @AfterEach
     public void afterEach(){
-        memoryMemberRepository.clearStore();
+        memberRepository.clearStore();
     }
 
     @Test

@@ -3,13 +3,22 @@ package hello.helloSpring.service;
 import hello.helloSpring.domain.Member;
 import hello.helloSpring.repository.MemberRepository;
 import hello.helloSpring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberService { //ctrl + Shift + T 테스트생성
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    // 생성자단축키 cmd + N
+    @Autowired
+    public MemberService(MemberRepository memberRepository) { //레파지토리를 외부에서 주입하도록
+        this.memberRepository = memberRepository;
+    }
 
     //회원가입
     public Long join(Member member) {
