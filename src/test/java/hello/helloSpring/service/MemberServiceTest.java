@@ -1,7 +1,9 @@
 package hello.helloSpring.service; //테스트는 패키지 똑같이 생성됨
 
 import hello.helloSpring.domain.Member;
+import hello.helloSpring.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,6 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberServiceTest {
 
     MemberService memberService = new MemberService();
+    MemoryMemberRepository memoryMemberRepository = new MemoryMemberRepository();
+    @AfterEach
+    public void afterEach(){
+        memoryMemberRepository.clearStore();
+    }
 
     @Test
     void join() { //테스트는 한글로 써도됨!!
@@ -34,15 +41,18 @@ class MemberServiceTest {
 
         //when
         memberService.join(member1);
-        try {
-            memberService.join(member2);
-            fail();
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+        Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
 
-        } catch (IllegalStateException e) {
-           // Assertions.assertThat(e.getMessage()).isEqualTo()
-
-
-        }
+//        try {
+//            memberService.join(member2);
+//            fail();
+//
+//        } catch (IllegalStateException e) {
+//            Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다. 123123");
+//
+//
+//        }
 
         //then
     }
