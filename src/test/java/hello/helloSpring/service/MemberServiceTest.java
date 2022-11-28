@@ -25,7 +25,7 @@ class MemberServiceTest {
     }
 
     @Test
-    public void 중복_회원_예외() {
+    public void exceptionExist() {
         //given
         Member member1 = new Member();
         member1.setName("스프링");
