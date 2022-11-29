@@ -15,7 +15,6 @@ public class MemberService { //ctrl + Shift + T 테스트생성
     private final MemberRepository memberRepository;
 
     // 생성자단축키 cmd + N
-    @Autowired
     public MemberService(MemberRepository memberRepository) { //레파지토리를 외부에서 주입하도록
         this.memberRepository = memberRepository;
     }
